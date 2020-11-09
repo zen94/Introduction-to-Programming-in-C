@@ -4,6 +4,16 @@
 
 void reverse(char * str) {
   //WRITE ME!
+  if (str == NULL){
+    return;
+  }
+  char temp = ' ';
+  int arrlen = strlen(str);
+  for (int i = 0; i < arrlen/2; i++){
+    temp = str[i];
+    str[i] = str[arrlen-i-1];
+    str[arrlen-i-1] = temp;
+  }
 }
 
 int main(void) {
