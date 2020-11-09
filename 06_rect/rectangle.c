@@ -35,80 +35,24 @@ rectangle canonicalize(rectangle r) {
 
 rectangle intersection(rectangle r1, rectangle r2) {
   //WRITE THIS FUNCTION
-  rectangle ret;
+  rectangle r3;
+  rectangle r4;
+  r4.width = 0;
+  r4.height = 0;
   r1 = canonicalize(r1);
   r2 = canonicalize(r2);
-  ret.x = max(r1.x,r2.x);
-  ret.y = max(r1.y,r2.y);
+  r3.x = max(r1.x, r2.x);
+  r3.width = min(r1.x+r1.width,r2.x+r2.width)-r3.x;
+  r3.y = max(r1.y, r2.y);
+  r3.height = min(r1.y+r1.height,r2.y+r2.height)-r3.y;
+  r3 = canonicalize(r3);
 
-  int r1xmax = r1.x+r1.width;
-  int r1ymax = r1.y+r1.height;
-  int r2xmax = r2.x+r2.width;
-  int r2ymax = r2.y+r2.height;
-
-  if (r1.x == r2xmax || r2.x == r1xmax){
-    if ((r1.y >= r2.y && r1ymax <= r2ymax)
-	|| (r2.y >= r1.y && r2ymax <= r1ymax)){
-      ret.height = min(r1.y,r2.y);
-    }
-    else if (r1.y < r2.y && r1ymax > r2.y){
-      ret.height = r1ymax - r2.y;
-    }
-    else if (r2.y < r1.y && r2ymax > r1.y){
-      ret.height = r2ymax - r1.y;
-    }
-    else if (r1ymax > r2ymax && r1.y < r2ymax){
-      ret.height = r1ymax - r2ymax;
-    }
-    else if (r2ymax > r1ymax && r2.y < r1ymax){
-      ret.height = r2ymax - r1ymax;
-    }
-  }
-  else if ((ret.y == r1.y && (r1ymax < r2ymax))
-	   ||(ret.y == r2.y && (r2ymax < r1ymax))){
-    ret.height = min(r1.height,r2.height);
-  }
-  else{
-    ret.height = min(r1.height,r2.height)
-      - max(r1ymax,r2ymax)
-      + min(r1ymax,r2ymax);
+  if(((r1.x > r2.x+r2.width)||(r2.x > r1.x+r1.width)) ||
+     ((r1.y > r2.y+r2.height)|| (r2.y>r1.y+r1.height))){
+    return r4;
   }
 
-  if (r1.y == r2ymax || r2.y == r1ymax){
-    if ((r1.x >= r2.x && r1xmax <= r2xmax)
-	|| (r2.x >= r1.x && r2xmax <= r1xmax)){
-      ret.width = min(r1.x,r2.x);
-    }
-    else if (r1.x < r2.x && r1xmax > r2.x){
-      ret.width = r1xmax - r2.x;
-    }
-    else if (r2.x < r1.x && r2xmax > r1.x){
-      ret.width = r2xmax - r1.x;
-    }
-    else if (r1xmax > r2xmax && r1.x < r2xmax){
-      ret.width = r1xmax - r2xmax;
-    }
-    else if (r2xmax > r1xmax && r2.x < r1xmax){
-      ret.width = r2xmax - r1xmax;
-    }
-  }
-  else if ((ret.x == r1.x && (r1xmax < r2xmax))
-	   || (ret.x == r2.x && (r2xmax < r1xmax))){
-    ret.width = min(r1.width,r2.width);
-  }
-  else{
-    ret.width = min(r1.width,r2.width)
-      - max(r1xmax,r2xmax)
-      + min(r1xmax,r2xmax);
-  }
-
-  if (ret.x > (r1xmax) || ret.x > (r2xmax)
-      || ret.y > (r1ymax) || ret.y > (r2ymax)){
-    ret.width = 0;
-    ret.height = 0;
-  }
-
-  return ret;
+  return r3;
 }
 
 //You should not need to modify any code below this line
