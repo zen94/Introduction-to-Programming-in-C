@@ -6,7 +6,7 @@ int compareNum(int num1, int num2){
   if (num1>=num2){
     return 0;
   }
-  if (num1<num2){
+  else{
     return 1;
   }
 }
