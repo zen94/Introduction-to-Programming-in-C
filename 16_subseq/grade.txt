@@ -1,0 +1,10 @@
+Grading at Mon Nov  9 15:47:14 UTC 2020
+Attempting to compile maxSeq.c 
+maxSeq.c: In function ‘compareNum’:
+maxSeq.c:12:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+cc1: all warnings being treated as errors
+The code did not compile!
+
+Overall Grade: F
