@@ -88,7 +88,7 @@ int main(int argc, char ** argv) {
 	hand_won = j;
 	istie = 0;
       }
-      else if(result == 0){ // tie
+      if(result == 0){ // tie
 	istie = 1;
       }
     }
