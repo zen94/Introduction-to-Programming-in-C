@@ -3,6 +3,8 @@
 #include <assert.h>
 #include "deck.h"
 
+#define TOTAL_CARDS 52
+
 void print_hand(deck_t * hand){
   for (int i = 0; i < hand->n_cards; i++){
     print_card(*hand->cards[i]);
