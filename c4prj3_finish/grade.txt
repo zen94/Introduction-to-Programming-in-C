@@ -1,4 +1,4 @@
-Grading at Tue Nov 10 15:56:51 UTC 2020
+Grading at Tue Nov 10 16:01:58 UTC 2020
 Running 'make clean' to do a clean build of your project
 rm -rf *.o poker *~
 Running 'make poker OTHERFLAGS=-O3' to build your project
@@ -25,9 +25,9 @@ Running a simulation with 25000 draws for 3 hands...
     Hand 2 was close enough to our answer
     Test case passed!    
 Running a simulation with 25000 draws for 2 hands...
- ** Hand 0 differed from our answer by 20.50%
+    Hand 0 was close enough to our answer
     Hand 1 was close enough to our answer
-*** Test case failed ***
+    Test case passed!    
 Running a simulation with 80000 draws for 4 hands...
     Hand 0 was close enough to our answer
     Hand 1 was close enough to our answer
@@ -58,4 +58,4 @@ Running a simulation with 100000 draws for 6 hands...
     Hand 5 was close enough to our answer
     Test case passed!    
 
-Overall Grade: B
+Overall Grade: A
