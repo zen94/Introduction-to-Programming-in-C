@@ -19,7 +19,10 @@ int main(int argc, char ** argv) {
   fc->decks = NULL;
   fc->n_decks = 0;
   deck_t* remain_deck = NULL;
-
+  int result = 0;
+  int hand_won = 0;
+  int istie = 0;
+  
   // Check command line arguments/report errors
   if (argc < 2) {
     fprintf(stderr,"Usage: at least 1 argument must be provided. eg ./count_values *file1* (optional)*num_trials*\n");
@@ -52,12 +55,10 @@ int main(int argc, char ** argv) {
   // wins, with one more element for if there was a tie
   // (so if there are 2 hands, you should have 3 elements).
   unsigned hand_wins[n_hands+1];
-  unsigned temp_hand_wins[n_hands+1];
 
   // and initialize all its values to 0.
   for (int i = 0; i <= n_hands; i++){
     hand_wins[i] = 0;
-    temp_hand_wins[i] = 0;
   }
 
   // Do each Monte Carlo trial (repeat num_trials times)
@@ -77,43 +78,25 @@ int main(int argc, char ** argv) {
     // an array, but using compare_hands
     // instead of >.
 
-    for (int i = 0; i <= n_hands; i++){
-      temp_hand_wins[i] = 0;
-    }
-
-    for (int i = 0; i < n_hands-1; i++){
-      for (int j = i+1; j < n_hands;j++){
-	int result = compare_hands(hands[i], hands[j]);
-
-	// Increment the win count for the winning
-	//  hand (or for the "ties" element of the array
-	//  if there was a tie).
-	if (result > 0){ // hand 1 win
-	  temp_hand_wins[i]++;
-	}
-	else if(result < 0){ // hand 2 win
-	  temp_hand_wins[j]++;
-	}
-	else{ // tie
-	  temp_hand_wins[n_hands]++;
-	}
+    hand_won = 0;
+    for (int j = 1; j < n_hands; j++){
+      result = compare_hands(hands[hand_won], hands[j]);
+      // Increment the win count for the winning
+      //  hand (or for the "ties" element of the array
+      //  if there was a tie).
+      if(result < 0){ // hand 2 win
+	hand_won = j;
+	istie = 0;
+      }
+      else if(result == 0){ // tie
+	istie = 1;
       }
     }
-
-    int win_hand_ind = 0;
-    int win_hand_val = 0;
-    for (int i = 0; i < n_hands; i++){
-      if (temp_hand_wins[i] > win_hand_val){
-	win_hand_ind = i;
-	win_hand_val = temp_hand_wins[i];
-      }
-    }
-
-    if (temp_hand_wins[n_hands] >= win_hand_val){
+    if (istie){
       hand_wins[n_hands]++;
     }
     else{
-      hand_wins[win_hand_ind]++;
+      hand_wins[hand_won]++;
     }
   }
 
