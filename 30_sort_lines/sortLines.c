@@ -63,7 +63,7 @@ void readFile(FILE* f){
 int main(int argc, char ** argv) {
   
   //WRITE YOUR CODE HERE!
-  if (argc < 2) {
+  if (argc < 1) {
     fprintf(stderr,"Usage: at least one argument must be provided. eg sortLines *input1* *input2* *input3* ...\n");
     return EXIT_FAILURE;
   }
