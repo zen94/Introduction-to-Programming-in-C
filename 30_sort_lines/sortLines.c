@@ -24,6 +24,24 @@ void printData(char** linearr, int count){
   free(linearr);
 }
 
+void readStd(void){
+  char* line = NULL;
+  char** linearr = NULL;
+  size_t sz = 0;
+  size_t linecount = 0;
+
+  while(getline(&line, &sz, stdin) >= 0){
+    linearr=realloc(linearr, (1+linecount)*sizeof(*linearr));
+    linearr[linecount] = line;
+    line = NULL;
+    linecount++;
+  }
+  free(line);
+
+  sortData(linearr,linecount);
+  printData(linearr,linecount);
+}
+
 void readFile(FILE* f){
   char* line = NULL;
   char** linearr = NULL;
@@ -50,20 +68,24 @@ int main(int argc, char ** argv) {
     return EXIT_FAILURE;
   }
 
-  for (int i = 0; i < argc-1;i++){
-    FILE * f = fopen(argv[i+1], "r");
-    if (f == NULL) {
-      perror("Could not open file");
-      return EXIT_FAILURE;
-    }
+  if (argc == 1){
+    readStd();
+  }
+  else{
+    for (int i = 0; i < argc-1;i++){
+      FILE * f = fopen(argv[i+1], "r");
+      if (f == NULL) {
+	perror("Could not open file");
+	return EXIT_FAILURE;
+      }
 
-    readFile(f);
+      readFile(f);
 
-    if (fclose(f) != 0) {
-      perror("Failed to close the input file!");
-      return EXIT_FAILURE;
+      if (fclose(f) != 0) {
+	perror("Failed to close the input file!");
+	return EXIT_FAILURE;
+      }
     }
   }
-
   return EXIT_SUCCESS;
 }
