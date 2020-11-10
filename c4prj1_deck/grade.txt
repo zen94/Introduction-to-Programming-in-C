@@ -1,0 +1,10 @@
+Grading at Tue Nov 10 14:46:07 UTC 2020
+Compiling deck.c -> deck.o
+deck.c: In function ‘make_deck_exclude’:
+deck.c:78:23: error: ‘TOTAL_CARDS’ undeclared (first use in this function)
+   for (int i = 0; i < TOTAL_CARDS; i++){
+                       ^
+deck.c:78:23: note: each undeclared identifier is reported only once for each function it appears in
+Compilation of deck.c failed
+
+Overall Grade: F
