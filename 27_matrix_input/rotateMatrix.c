@@ -58,6 +58,7 @@ int main(int argc, char ** argv){
     for(col = 0; col < MATRIXSIZE; col++){
       if (line[col] == '\n'){
 	fprintf(stderr,"Data too short on row %d\n",row);
+	return EXIT_FAILURE;
       }
       matrix[row][col] = line[col];
     }
