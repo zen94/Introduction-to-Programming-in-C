@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#define TOTAL_CARDS 52
+
 int card_ptr_comp(const void * vp1, const void * vp2) {
   const card_t * const * cp1 = vp1;
   const card_t * const * cp2 = vp2;
