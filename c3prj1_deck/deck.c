@@ -26,7 +26,7 @@ int deck_contains(deck_t * d, card_t c) {
 void shuffle(deck_t * d){
   card_t swapcard;
   unsigned swapind;
-  for (int i=0;i<d->n_cards/2;i++){
+  for (int i=0;i<d->n_cards/4;i++){
     swapind = rand()%(d->n_cards);
     swapcard = *d->cards[swapind];
     *d->cards[swapind] = *d->cards[i];
