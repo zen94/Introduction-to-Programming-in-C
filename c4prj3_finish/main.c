@@ -79,16 +79,20 @@ int main(int argc, char ** argv) {
     // instead of >.
 
     hand_won = 0;
+    istie = 0;
     for (int j = 1; j < n_hands; j++){
       result = compare_hands(hands[hand_won], hands[j]);
       // Increment the win count for the winning
       //  hand (or for the "ties" element of the array
       //  if there was a tie).
-      if(result < 0){ // hand 2 win
+      if(result > 0){ // hand 1 win
+	istie = 0;
+      }
+      else if(result < 0){ // hand 2 win
 	hand_won = j;
 	istie = 0;
       }
-      if(result == 0){ // tie
+      else{ // tie
 	istie = 1;
       }
     }
